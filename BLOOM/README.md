@@ -1,178 +1,235 @@
-# ALCHE — African Arts, Culture & Commerce
+# BLOOM: Arts · Culture · Commerce
 
-ALCHE is a polished React + TypeScript prototype for a women-centered African arts, culture, and commerce platform. It turns the assignment's **Discover → Connect → Monetize → Uplift** model into an editorial marketplace experience.
+A multi-page front-end web app for ALCHE, a digital home for African women creatives. Visitors can read maker stories, browse a marketplace of handmade pieces, explore opportunities, and join the collective.
 
-The interface is intentionally designed to feel like a living cultural journal rather than a generic storefront: warm clay and paper tones, an editorial serif/sans font pairing, tactile card layouts, and clear pathways from story to sale to support.
+Built with **React 19**, **TypeScript**, **Vite**, **wouter** (routing), **sonner** (toast notifications) and **lucide-react** (icons).
 
-## What is included
+---
 
-- **Discover:** searchable, filterable stories from African women creatives.
-- **Connect:** creator locations, story details, save buttons, appreciation/like actions, and community CTAs.
-- **Monetize:** a direct-access marketplace with maker information, origin, pricing, and an interactive bag counter.
-- **Uplift:** mentorship, scholarship, and conference opportunity cards.
-- **Responsive design:** desktop, tablet, and mobile layouts with a mobile bottom navigation bar.
-- **Prototype interactions:** buttons, filters, search, add-to-bag actions, saved stories, likes, scrolling navigation, and toast feedback are wired up locally.
+## Table of contents
 
-> This is a frontend-only prototype. It does not process payments, authenticate users, store data, or connect to a production marketplace backend yet.
+1. [What you need before starting](#1-what-you-need-before-starting)
+2. [Get the code](#2-get-the-code)
+3. [Install dependencies](#3-install-dependencies)
+4. [Run the app locally](#4-run-the-app-locally)
+5. [Build for production](#5-build-for-production)
+6. [Pages and routes](#6-pages-and-routes)
+7. [Project structure](#7-project-structure)
+8. [Editing content](#8-editing-content)
+9. [Deploying](#9-deploying)
+10. [Troubleshooting](#10-troubleshooting)
 
-## Technology
+---
 
-- React 19
-- TypeScript
-- Vite
-- Tailwind CSS 4 (available through the scaffold)
-- Lucide React icons
-- Sonner toast notifications
-- Wouter-compatible project scaffold
+## 1. What you need before starting
 
-## Run the project on your device
+You need three things installed on your computer.
 
-### 1. Install the prerequisites
+### a) Node.js (version 20.19 or newer, or 22.12 or newer)
 
-Install these first:
+Vite 7 will not run on older versions.
 
-- [Node.js](https://nodejs.org/) 20 or newer
-- Git
-- pnpm (recommended) or npm
-
-To install pnpm after installing Node.js:
+1. Go to <https://nodejs.org> and download the **LTS** version.
+2. Run the installer and accept the defaults.
+3. Open a **new** terminal and check the version:
 
 ```bash
-npm install --global pnpm
+node -v
 ```
 
-### 2. Get the code from GitHub
+It should print `v20.19.0` or higher (or `v22.12.0` or higher).
 
-Once the repository has been created on GitHub, copy its URL and run:
+### b) pnpm (package manager)
+
+This project uses pnpm. Install it with:
 
 ```bash
-git clone https://github.com/<your-github-username>/<your-repository-name>.git
-cd <your-repository-name>
+npm install -g pnpm
 ```
 
-For example:
+Check it worked:
 
 ```bash
-git clone https://github.com/marieanne/alche-african-arts-platform.git
-cd alche-african-arts-platform
+pnpm -v
 ```
 
-If the GitHub repository is private, GitHub may ask you to sign in or use an SSH URL instead:
+### c) Git (only if you are cloning from GitHub)
+
+Download from <https://git-scm.com/downloads>, then check with:
 
 ```bash
-git clone git@github.com:<your-github-username>/<your-repository-name>.git
+git --version
 ```
 
-### 3. Install dependencies
+---
 
-From inside the project folder, run:
+## 2. Get the code
+
+**Option A: clone from GitHub**
+
+```bash
+git clone https://github.com/OrpheliePerrine/BLOOM.git
+cd BLOOM
+```
+
+Replace the URL with the real address of this repository.
+
+**Option B: download a ZIP**
+
+1. On the GitHub page, click the green **Code** button, then **Download ZIP**.
+2. Extract the ZIP.
+3. Open a terminal inside the extracted folder (in VS Code: **File → Open Folder**, then **Terminal → New Terminal**).
+
+Make sure your terminal is in the folder that contains `package.json`. You can check with `ls` (macOS/Linux) or `dir` (Windows).
+
+---
+
+## 3. Install dependencies
+
+From the project root, run:
 
 ```bash
 pnpm install
 ```
 
-If you prefer npm:
+This creates a `node_modules/` folder and may take a minute. It only needs to be done once, or again whenever `package.json` changes.
 
-```bash
-npm install
-```
+---
 
-### 4. Start the development server
-
-With pnpm:
+## 4. Run the app locally
 
 ```bash
 pnpm dev
 ```
 
-With npm:
+The terminal will print something like:
 
-```bash
-npm run dev
+```
+  VITE v7.x.x  ready
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.x.x:5173/
 ```
 
-Vite will print a local URL, normally:
+Open the **Local** address in your browser. The site reloads automatically when you save a file.
 
-```text
-http://localhost:5173
-```
+To view it on your phone, connect the phone to the same Wi-Fi and open the **Network** address.
 
-Open that URL in your browser. The page updates automatically when you edit files.
+To stop the server, press `Ctrl + C` in the terminal.
 
-### 5. Check the project
+> **Internet connection required:** the images load from Unsplash, so they will not appear offline.
 
-Run the TypeScript check:
+---
 
-```bash
-pnpm check
-```
-
-Create a production build:
+## 5. Build for production
 
 ```bash
 pnpm build
 ```
 
-Preview the production build locally:
+This creates an optimized version of the site in the `dist/` folder.
+
+To preview that production build locally:
 
 ```bash
 pnpm preview
 ```
 
-## Main project files
+---
 
-```text
-client/
-  index.html              Document title and Google Fonts
-  src/
-    App.tsx               App shell and theme providers
-    index.css             ALCHE design system and responsive styles
-    pages/Home.tsx        Main page, sample content, and interactions
-    components/ui/        Reusable scaffold UI components
-server/
-  index.ts                Scaffold server for production preview
-README.md                 This guide
+## 6. Pages and routes
+
+| URL | Page |
+| --- | --- |
+| `/` | Home |
+| `/stories` | All stories, with search and category filters |
+| `/stories/:id` | A single story |
+| `/market` | Marketplace |
+| `/market/:id` | A single product |
+| `/uplift` | Opportunities: mentorship, scholarships, conferences |
+| `/join` | Join the collective (sign-up form) |
+| anything else | 404 page |
+
+**Note:** the shopping bag counter and the join form are front-end demos. Nothing is saved to a server, and refreshing the page resets the bag.
+
+---
+
+## 7. Project structure
+
+```
+.
+├── client/
+│   ├── index.html
+│   ├── public/                 Static files (favicon, etc.)
+│   └── src/
+│       ├── main.tsx            App entry point
+│       ├── App.tsx             Routes and layout
+│       ├── index.css           All site styling
+│       ├── data/
+│       │   └── content.ts      Stories, products and opportunities
+│       ├── components/
+│       │   ├── BagContext.tsx  Shopping bag counter (shared state)
+│       │   ├── Header.tsx
+│       │   ├── Footer.tsx
+│       │   ├── ScrollToTop.tsx
+│       │   ├── StoryCard.tsx
+│       │   └── ProductCard.tsx
+│       └── pages/
+│           ├── Home.tsx
+│           ├── Stories.tsx
+│           ├── StoryDetail.tsx
+│           ├── Market.tsx
+│           ├── ProductDetail.tsx
+│           ├── Uplift.tsx
+│           ├── Join.tsx
+│           └── NotFound.tsx
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+└── README.md
 ```
 
-## Make your own changes
+---
 
-- Change example stories and products in `client/src/pages/Home.tsx`.
-- Change colors, typography, breakpoints, and layout in `client/src/index.css`.
-- Update the browser title and fonts in `client/index.html`.
-- Keep image files outside `client/public` for this static scaffold. The prototype currently uses remote image URLs so the repository stays lightweight.
+## 8. Editing content
 
-## Push the code to GitHub
+Almost all text, prices and images live in one file: **`client/src/data/content.ts`**.
 
-If you are starting from a local copy and have not created the GitHub repository yet:
+- **Add a story:** add a new object to the `stories` array with a unique `id`.
+- **Add a product:** add a new object to the `products` array with a unique `id`.
+- **Change opportunities:** edit the `opportunities` array.
+- **Change images:** replace the `image` URLs.
 
-```bash
-git init
-git add .
-git commit -m "Create ALCHE African arts platform"
-git branch -M main
-git remote add origin https://github.com/<your-github-username>/<your-repository-name>.git
-git push -u origin main
+Save the file and the browser updates immediately.
+
+Colors, fonts and spacing are controlled in `client/src/index.css`.
+
+---
+
+## 9. Deploying
+
+The site is a single-page app, so the host must send every URL to `index.html`. Otherwise refreshing on `/stories/1` will show a 404.
+
+Use these settings on any static host:
+
+| Setting | Value |
+| --- | --- |
+| Install command | `pnpm install` |
+| Build command | `pnpm build` |
+| Output directory | `dist` |
+
+**Netlify:** add a file `client/public/_redirects` containing:
+
+```
+/*  /index.html  200
 ```
 
-After future changes:
+**Vercel:** add a `vercel.json` in the project root:
 
-```bash
-git add .
-git commit -m "Describe your change"
-git push
+```json
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
 ```
 
-## Suggested next sprint
-
-The assignment describes an Agile Scrum approach. This prototype is a strong Sprint 3/4 interface foundation. A production build could add:
-
-1. User accounts and creator profiles.
-2. Database-backed stories, products, inventory, and opportunity listings.
-3. Localized mobile-money checkout integrations.
-4. Media upload for craft process videos and storytelling posts.
-5. Mentor matching, scholarship applications, and conference registration.
-6. Moderation, reporting, privacy controls, and low-bandwidth media options.
-
-## Credits and note
-
-ALCHE is a concept prototype based on the provided formative assignment brief. Example imagery is loaded from Unsplash and should be replaced or licensed appropriately before a commercial launch.
+---
