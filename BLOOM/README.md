@@ -17,7 +17,6 @@ Built with **React 19**, **TypeScript**, **Vite**, **wouter** (routing), **sonne
 7. [Project structure](#7-project-structure)
 8. [Editing content](#8-editing-content)
 9. [Deploying](#9-deploying)
-10. [Troubleshooting](#10-troubleshooting)
 
 ---
 
